@@ -11,6 +11,8 @@ token = open('token.txt')
 
 client = discord.Client()
 
+#hello world
+
 @client.event
 async def on_ready():
     print('Logged in as')
