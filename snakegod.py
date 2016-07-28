@@ -69,5 +69,7 @@ async def on_message(message):
         print('CMD [pcstats] > Host PC Stats Checked')
     elif message.content.startswith('<@207266746594361344>'):
         await client.send_message(message.channel, '... hello')
-        print('CMD [mentioned] > Metioned by user')
+        print('CMD [mentioned] > Metioned by user:' + message.author)
+    elif message.content.startswith('00invite'):
+        await client.send_message(message.channel, discord.utils.oauth_url(client_id=client.user.id, permissions=66321471, server=None,redirect_uri=None))
 client.run(token.read())
