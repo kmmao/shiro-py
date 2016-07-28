@@ -63,8 +63,10 @@ async def on_message(message):
         print('CMD [hentai] > Pervy perv~')
     elif message.content.startswith('00time'):
         await client.send_message(message.channel, current_time)
-        print('CMD [time] >  Time Written: ' + str(current_time))
+        print('CMD [time] > Time Written: ' + str(current_time))
     elif message.content.startswith('00pcstats'):
         await client.send_message(message.channel, '**MEM Stats:** \n' + str(psutil.virtual_memory()) + '\n\n **CPU Stats:** \n' + str(psutil.cpu_stats()) + '\n\n **CPU Percent:** \n' + str(psutil.cpu_percent(percpu=True)))
         print('CMD [pcstats] > Host PC Stats Checked')
+        await client.send_message(message.channel, '... hello')
+        print('CMD [mentioned] > Metioned by user')
 client.run(token.read())
