@@ -67,6 +67,7 @@ async def on_message(message):
     elif message.content.startswith('00pcstats'):
         await client.send_message(message.channel, '**MEM Stats:** \n' + str(psutil.virtual_memory()) + '\n\n **CPU Stats:** \n' + str(psutil.cpu_stats()) + '\n\n **CPU Percent:** \n' + str(psutil.cpu_percent(percpu=True)))
         print('CMD [pcstats] > Host PC Stats Checked')
+    elif message.content.startswith('<@207266746594361344>'):
         await client.send_message(message.channel, '... hello')
         print('CMD [mentioned] > Metioned by user')
 client.run(token.read())
