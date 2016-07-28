@@ -11,7 +11,12 @@ start_time = time.time()
 time = time.time()
 current_time = datetime.datetime.now().time()
 current_time.isoformat()
+print('Checking Token...')
+if os.path.isfile('token.txt') == False:
+    sys.exit('Fatal Error: token.txt is not present')
 token = open('token.txt')
+if os.stat('token.txt').st_size == 0:
+    sys.exit('Fatal Error: token.txt is empty')
 print('Token Loaded')
 
 client = discord.Client()
