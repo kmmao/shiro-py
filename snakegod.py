@@ -63,8 +63,13 @@ async def on_message(message):
         print('CMD [hentai] > Pervy perv~')
     elif message.content.startswith('00time'):
         await client.send_message(message.channel, current_time)
-        print('CMD [time] >  Time Written: ' + str(current_time))
+        print('CMD [time] > Time Written: ' + str(current_time))
     elif message.content.startswith('00pcstats'):
         await client.send_message(message.channel, '**MEM Stats:** \n' + str(psutil.virtual_memory()) + '\n\n **CPU Stats:** \n' + str(psutil.cpu_stats()) + '\n\n **CPU Percent:** \n' + str(psutil.cpu_percent(percpu=True)))
         print('CMD [pcstats] > Host PC Stats Checked')
+    elif message.content.startswith('<@207266746594361344>'):
+        await client.send_message(message.channel, '... hello')
+        print('CMD [mentioned] > Metioned by user:' + message.author)
+    elif message.content.startswith('00invite'):
+        await client.send_message(message.channel, discord.utils.oauth_url(client_id=207266727132790785, permissions=None, server=None, redirect_uri=None))
 client.run(token.read())
