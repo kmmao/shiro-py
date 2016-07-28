@@ -71,5 +71,5 @@ async def on_message(message):
         await client.send_message(message.channel, '... hello')
         print('CMD [mentioned] > Metioned by user:' + message.author)
     elif message.content.startswith('00invite'):
-        await client.send_message(message.channel, discord.utils.oauth_url(client_id=client.user.id, permissions=66321471, server=None,redirect_uri=None))
+        await client.send_message(message.channel, discord.utils.oauth_url(client_id=207266727132790785, permissions=None, server=None, redirect_uri=None))
 client.run(token.read())
