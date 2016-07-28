@@ -6,16 +6,19 @@ import time
 import datetime
 import psutil
 
+print('Starting up...')
 start_time = time.time()
 time = time.time()
 current_time = datetime.datetime.now().time()
 current_time.isoformat()
-
 token = open('token.txt')
+print('Token Loaded')
 
 client = discord.Client()
 
 #hello world
+
+print('Connecting to Discord...')
 
 @client.event
 async def on_ready():
@@ -35,27 +38,28 @@ async def on_message(message):
                 counter += 1
         await client.edit_message(tmp, 'You have {} messages.'.format(counter))
     elif message.content.startswith('00sleep'):
+        print('CMD [sleep] > Sleep invoked...')
         await client.send_message(message.channel, 'Good night...')
         await asyncio.sleep(5)
         await client.send_message(message.channel, 'Good morning!')
+        print('CMD [sleep] > Slept for 5 seconds.')
     elif message.content.startswith('00function'):
         await client.send_message(message.channel, 'Function trigger recognized!')
+        print('CMD [function] > Function check triggered.')
     elif message.content.startswith('00die'):
         await client.send_message(message.channel, 'Shiro shutting off... Good bye!')
+        print('CMD [die] > Shutting off...')
         sys.exit('Closed by command.')
-    elif message.content.startswith('00restart'):
-        await client.send_message(message.channel, 'Shiro restarting...')
-        os.execv('snakegod.py')
-        sys.exit('Restarting.')
     elif message.content.startswith('00echo '):
         await client.send_message(message.channel, message.content[6:])
+        print('CMD [echo] > Manual echo invoked with messsage: ' + message.content[6:])
     elif message.content.startswith('00hentai'):
         await client.send_message(message.channel, 'For Hentai and other **NSFW** commands go to the #nsfw channel and spam the shit out of them, for more info, type `-commands NSFW` and @Shizuru will tell you what she can provide!')
+        print('CMD [hentai] > Pervy perv~')
     elif message.content.startswith('00time'):
         await client.send_message(message.channel, current_time)
+        print('CMD [time] >  Time Written: ' + str(current_time))
     elif message.content.startswith('00pcstats'):
-        await client.send_message(message.channel, 'Memory Data:')
-        await client.send_message(message.channel, psutil.virtual_memory())
-        await client.send_message(message.channel, 'CPU Data:')
-        await client.send_message(message.channel, psutil.cpu_stats())
+        await client.send_message(message.channel, '**MEM Stats:** \n' + str(psutil.virtual_memory()) + '\n\n **CPU Stats:** \n' + str(psutil.cpu_stats()) + '\n\n **CPU Percent:** \n' + str(psutil.cpu_percent(percpu=True)))
+        print('CMD [pcstats] > Host PC Stats Checked')
 client.run(token.read())
