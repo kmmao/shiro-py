@@ -15,16 +15,16 @@ print('Checking Token...')
 if os.path.isfile('token.txt') == False:
     open('token.txt', 'w')
     sys.exit('Fatal Error: token.txt is not present, made a new empty one.')
-elif os.stat('token.txt').st_size == 0:
+if os.stat('token.txt').st_size == 0:
     sys.exit('Fatal Error: token.txt is empty.')
 token = open('token.txt')
 print('Token Loaded')
 
 print('Loading command prefix...')
-elif os.path.isfile('prefix.txt') == False:
+if os.path.isfile('prefix.txt') == False:
     open('prefix.txt', 'w')
-    sys.exit('Fatal Error: prefix.txt is not present, made a new empty one.')
-elif os.stat('prefix.txt').st_size == 0:
+    sys.exit('Fatal Error: prefix.txt is not present, made a new empty one.');
+if os.stat('prefix.txt').st_size == 0:
     sys.exit('Fatal Error: prefix.txt is empty.')
 prefix = open('prefix.txt')
 pfx = str(prefix.read())
