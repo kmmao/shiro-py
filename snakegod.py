@@ -27,10 +27,14 @@ print('Connecting to Discord...')
 
 @client.event
 async def on_ready():
+    print('Login Details:')
+    print('--------------')
     print('Logged in as:')
     print(client.user.name)
+    print('--------------')
     print('Bot User ID:')
     print(client.user.id)
+    print('--------------')
     print('Finished Loading')
 
 @client.event
@@ -69,7 +73,12 @@ async def on_message(message):
         print('CMD [pcstats] > Host PC Stats Checked')
     elif message.content.startswith('<@207266746594361344>'):
         await client.send_message(message.channel, '... hello')
-        print('CMD [mentioned] > Metioned by user:' + message.author)
+        print('CMD [mentioned] > Metioned by user: ' + str(message.author))
     elif message.content.startswith('00invite'):
-        await client.send_message(message.channel, discord.utils.oauth_url(client_id=207266727132790785, permissions=None, server=None, redirect_uri=None))
+        await client.send_message(message.channel,'Click this link to invite me to your server: ' +  discord.utils.oauth_url(client_id=207266727132790785, permissions=None, server=None, redirect_uri=None))
+        print('CMD [invite] > Invite Link Generated')
+    elif message.content.startswith('00help'):
+        await client.send_message(message.channel, 'I am still very new so the only things I can do are:\n`00test`\n`00sleep`\n`00echo`\n`00time`\n`00pcstats`\n`00invite`\n\n **Have fun~**')
+        print('CMD [help] > Help requested by: ' + str(message.author))
+
 client.run(token.read())
