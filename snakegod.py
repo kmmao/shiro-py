@@ -23,7 +23,7 @@ print('Token Loaded')
 print('Loading command prefix...')
 if os.path.isfile('prefix.txt') == False:
     open('prefix.txt', 'w')
-    sys.exit('Fatal Error: prefix.txt is not present, made a new empty one.');
+    sys.exit('Fatal Error: prefix.txt is not present, made a new empty one.')
 if os.stat('prefix.txt').st_size == 0:
     sys.exit('Fatal Error: prefix.txt is empty.')
 prefix = open('prefix.txt')
