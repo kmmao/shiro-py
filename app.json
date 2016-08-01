@@ -45,7 +45,7 @@
   ],
   "buildpacks": [
     {
-      "url": "https://github.com/stomita/heroku-buildpack-python"
+      "url": "https://elements.heroku.com/buildpacks/heroku/heroku-buildpack-python"
     }
   ]
 }
