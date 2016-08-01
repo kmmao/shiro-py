@@ -1,0 +1,51 @@
+{
+  "name": "Shiro Bot",
+  "description": "The cute, silent, efficient bot.",
+  "keywords": [
+    "discord",
+    "bot",
+    "python"
+  ],
+  "website": "http://auroraproject.xyz",
+  "repository": "https://github.com/AXAz0r/shiro-py",
+  "logo": "https://images-ext-2.discordapp.net/.eJwNycENgzAMBdBdMgBOsTGEbUw-aqlaYSWBS9Xd4fj0fuEonzCHV2teZyJsNe8F5t7l_UvmGx11LZX6OPaqo-iQhPXBImSnNbsrZlXwxFCNgowlLZgkye3VGOje_gz_Cx8nIQE.7RDMIvHabbQwhIvrL_XeV4iJNjo.jpg",
+  "success_url": "/welcome",
+  "scripts": {
+    "postdeploy": "bundle exec rake bootstrap"
+  },
+  "env": {
+    "SECRET_TOKEN": {
+      "description": "A secret key for verifying the integrity of signed cookies.",
+      "generator": "secret"
+    },
+    "WEB_CONCURRENCY": {
+      "description": "The number of processes to run.",
+      "value": "5"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 2,
+      "size": "Performance-M"
+    }
+  },
+  "image": "heroku/python",
+  "addons": [
+    "openredis",
+    {
+      "plan": "mongolab:shared-single-small",
+      "as": "MONGO"
+    },
+    {
+      "plan": "heroku-postgresql",
+      "options": {
+        "version": "9.5"
+      }
+    }
+  ],
+  "buildpacks": [
+    {
+      "url": "https://elements.heroku.com/buildpacks/heroku/heroku-buildpack-python"
+    }
+  ]
+}
