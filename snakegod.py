@@ -36,7 +36,7 @@ client = discord.Client()
 
 @client.event
 async def on_ready():
-    print('Login Details:')
+    print('\nLogin Details:')
     print('--------------')
     print('Logged in as:')
     print(client.user.name)
