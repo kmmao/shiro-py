@@ -69,7 +69,6 @@ async def on_message(message):
         print('CMD [die] > Shutting off...')
         sys.exit('Closed by command.')
     elif message.content.startswith(pfx + 'echo '):
-        print(time.strftime("%c") + "; cmd: echo; " + message.author.name + ": " + message.content[5 + len(pfx):])
         await client.send_message(message.channel, message.content[5 + len(pfx):])
         print('CMD [echo] > Manual echo invoked with messsage: ' + message.content[5 + len(pfx):])
     elif message.content.startswith(pfx + 'hentai'):
