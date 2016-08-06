@@ -84,7 +84,7 @@ async def on_message(message):
         await client.send_message(message.channel, 'Nani desu ka?')
         print('CMD [mentioned] > Metioned by user: ' + str(message.author))
     elif message.content.startswith(pfx + 'invite'):
-        await client.send_message(message.channel,'Click this link to invite me to your server: ' +  discord.utils.oauth_url(client_id=207266727132790785, permissions=None, server=None, redirect_uri=None))
+        await client.send_message(message.channel,'Click this link to invite me to your server: ' + discord.utils.oauth_url(client_id=207266727132790785, permissions=None, server=None, redirect_uri=None))
         print('CMD [invite] > Invite Link Generated')
     elif message.content.startswith(pfx + 'help'):
         await client.send_message(message.channel, 'I am still very new so the only things I can do are:\n`' + pfx + 'test`\n`' + pfx + 'sleep`\n`' + pfx + 'echo`\n`' + pfx + 'time`\n`' + pfx + 'pcstats`\n`' + pfx + 'invite`\n\n **Have fun~**')
