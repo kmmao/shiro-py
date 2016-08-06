@@ -71,7 +71,7 @@ async def on_message(message):
     elif message.content.startswith(pfx + 'echo '):
         await client.send_message(message.channel, message.content[5 + len(pfx):])
         print('CMD [echo] > Manual echo invoked with messsage: ' + message.content[5 + len(pfx):])
-    elif message.content.startswith(pfx + 'hentai'):
+    elif message.content.startswith('hentai'):
         await client.send_message(message.channel, 'For Hentai and other **NSFW** commands go to the #nsfw channel and spam the shit out of them, for more info, type `-commands NSFW` and @Shizuru will tell you what she can provide!')
         print('CMD [hentai] > Pervy perv~')
     elif message.content.startswith(pfx + 'time'):
@@ -87,7 +87,7 @@ async def on_message(message):
         await client.send_message(message.channel,'Click this link to invite me to your server: ' +  discord.utils.oauth_url(client_id=207266727132790785, permissions=None, server=None, redirect_uri=None))
         print('CMD [invite] > Invite Link Generated')
     elif message.content.startswith(pfx + 'help'):
-        await client.send_message(message.channel, 'I am still very new so the only things I can do are:\n`00test`\n`00sleep`\n`00echo`\n`00time`\n`00pcstats`\n`00invite`\n\n **Have fun~**')
+        await client.send_message(message.channel, 'I am still very new so the only things I can do are:\n`' + pfx + 'test`\n`' + pfx + 'sleep`\n`' + pfx + 'echo`\n`' + pfx + 'time`\n`' + pfx + 'pcstats`\n`' + pfx + 'invite`\n\n **Have fun~**')
         print('CMD [help] > Help requested by: ' + str(message.author))
 
 client.run(token.read())
