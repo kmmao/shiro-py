@@ -5,34 +5,31 @@ import os
 import time
 import datetime
 import psutil
+import json
 
 print('Starting up...')
 start_time = time.time()
 time = time.time()
 current_time = datetime.datetime.now().time()
 current_time.isoformat()
-print('Checking Token...')
-if os.path.isfile('token.txt') == False:
-    open('token.txt', 'w')
-    sys.exit('Fatal Error: token.txt is not present, made a new empty one.')
-if os.stat('token.txt').st_size == 0:
-    sys.exit('Fatal Error: token.txt is empty.')
-token = open('token.txt')
-print('Token Loaded')
 
-print('Loading command prefix...')
-if os.path.isfile('prefix.txt') == False:
-    open('prefix.txt', 'w')
-    sys.exit('Fatal Error: prefix.txt is not present, made a new empty one.')
-if os.stat('prefix.txt').st_size == 0:
-    sys.exit('Fatal Error: prefix.txt is empty.')
-prefix = open('prefix.txt')
-pfx = str(prefix.read())
-print('Prefix loaded: ' + pfx)
+if os.path.isfile('config.json') == False:
+    sys.exit(
+        'Fatal Error: config.json is not present.\nIf you didn\'t already, rename config.example.json to config.json and try again.')
+
+with open('config.json', 'r', encoding='utf-8') as file:
+    config = file.read()
+    config = json.loads(config)
+
+token = (config['Token'])
+if token == '':
+    sys.exit('Token not provided, please open config.json and place your token.')
+pfx = (config['Prefix'])
 
 client = discord.Client()
 
-#I love spaghetti!
+
+# I love spaghetti!
 
 @client.event
 async def on_ready():
@@ -44,7 +41,13 @@ async def on_ready():
     print('Bot User ID:')
     print(client.user.id)
     print('--------------')
-    print('Finished Loading')
+    print('Running discord.py version ' + discord.__version__)
+    print('--------------')
+    print('Finished Loading\n')
+    print('Authors: AXAz0r, Awakening, Battlemuffins')
+    print('Bot Version: Beta 0.11')
+    print('Build Date: 8. August 2016.')
+
 
 @client.event
 async def on_message(message):
@@ -72,22 +75,32 @@ async def on_message(message):
         await client.send_message(message.channel, message.content[5 + len(pfx):])
         print('CMD [echo] > Manual echo invoked with messsage: ' + message.content[5 + len(pfx):])
     elif message.content.startswith('hentai'):
-        await client.send_message(message.channel, 'For Hentai and other **NSFW** commands go to the #nsfw channel and spam the shit out of them, for more info, type `-commands NSFW` and @Shizuru will tell you what she can provide!')
+        await client.send_message(message.channel,
+                                  'For Hentai and other **NSFW** commands go to the #nsfw channel and spam the shit out of them, for more info, type `-commands NSFW` and @Shizuru will tell you what she can provide!')
         print('CMD [hentai] > Pervy perv~')
     elif message.content.startswith(pfx + 'time'):
         await client.send_message(message.channel, current_time)
         print('CMD [time] > Time Written: ' + str(current_time))
     elif message.content.startswith(pfx + 'pcstats'):
-        await client.send_message(message.channel, '**MEM Stats:** \n' + str(psutil.virtual_memory()) + '\n\n **CPU Stats:** \n' + str(psutil.cpu_stats()) + '\n\n **CPU Percent:** \n' + str(psutil.cpu_percent(percpu=True)))
+        await client.send_message(message.channel,
+                                  '**MEM Stats:** \n' + str(psutil.virtual_memory()) + '\n\n **CPU Stats:** \n' + str(
+                                      psutil.cpu_stats()) + '\n\n **CPU Percent:** \n' + str(
+                                      psutil.cpu_percent(percpu=True)))
         print('CMD [pcstats] > Host PC Stats Checked')
     elif message.content.startswith('<@207266746594361344>'):
         await client.send_message(message.channel, 'Nani desu ka?')
         print('CMD [mentioned] > Metioned by user: ' + str(message.author))
     elif message.content.startswith(pfx + 'invite'):
-        await client.send_message(message.channel,'Click this link to invite me to your server: ' + discord.utils.oauth_url(client_id=207266727132790785, permissions=None, server=None, redirect_uri=None))
+        await client.send_message(message.channel,
+                                  'Click this link to invite me to your server: ' + discord.utils.oauth_url(
+                                      client_id=207266727132790785, permissions=None, server=None, redirect_uri=None))
         print('CMD [invite] > Invite Link Generated')
     elif message.content.startswith(pfx + 'help'):
-        await client.send_message(message.channel, 'I am still very new so the only things I can do are:\n`' + pfx + 'test`\n`' + pfx + 'sleep`\n`' + pfx + 'echo`\n`' + pfx + 'time`\n`' + pfx + 'pcstats`\n`' + pfx + 'invite`\n\n **Have fun~**')
+        await client.send_message(message.channel,
+                                  'I am still very new so the only things I can do are:\n`' + pfx + 'test`\n`' + pfx + 'sleep`\n`' + pfx + 'echo`\n`' + pfx + 'time`\n`' + pfx + 'pcstats`\n`' + pfx + 'invite`\n\n **Have fun~**')
         print('CMD [help] > Help requested by: ' + str(message.author))
+    elif message.content.startswith(pfx + 'owner'):
+        print('The owner ID check triggered by ' + str(message.author))
 
-client.run(token.read())
+
+client.run(token)
