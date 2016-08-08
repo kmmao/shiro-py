@@ -25,8 +25,13 @@ token = (config['Token'])
 if token == '':
     sys.exit('Token not provided, please open config.json and place your token.')
 pfx = (config['Prefix'])
+ownr = (config['OwnerID'])
 
 client = discord.Client()
+
+# Commands
+
+report_cmd = 'report '
 
 
 # I love spaghetti!
@@ -100,7 +105,13 @@ async def on_message(message):
                                   'I am still very new so the only things I can do are:\n`' + pfx + 'test`\n`' + pfx + 'sleep`\n`' + pfx + 'echo`\n`' + pfx + 'time`\n`' + pfx + 'pcstats`\n`' + pfx + 'invite`\n\n **Have fun~**')
         print('CMD [help] > Help requested by: ' + str(message.author))
     elif message.content.startswith(pfx + 'owner'):
-        print('The owner ID check triggered by ' + str(message.author))
-
+        if message.author.id == ownr:
+            await client.send_message(message.channel, '<@' + str(message.author.id) + '> Is the owner')
+        else:
+            await client.send_message(message.channel, '<@' + str(message.author.id) + '> Is not the owner')
+        print('The owner ID check triggered by ' + str(message.author) + ' ,UserID:' + message.author.id + '. Server: ' + message.server.id)
+    elif message.content.startswith(pfx + report_cmd):
+        await client.send_message(message.author, message.content[len(report_cmd) + len(pfx):])
+        print('Raproted')
 
 client.run(token)
