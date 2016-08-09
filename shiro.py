@@ -80,7 +80,7 @@ async def on_ready():
 @client.event
 async def on_message(message):
     initiator_data = ('by ' + str(message.author) + ' ,UserID: ' + message.author.id + '. Server: ' + message.server.id)
-    client
+    client.change_status(game=None)
     if message.content.startswith(pfx + cmd_count):
         cmd_name = 'Count'
         counter = 0
