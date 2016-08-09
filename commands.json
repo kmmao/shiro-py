@@ -1,0 +1,16 @@
+{
+	"cmd_count": "count",
+	"cmd_sleep": "sleep",
+	"cmd_test": "test",
+	"cmd_die": "die",
+	"cmd_echo": "echo",
+	"cmd_pcstats": "pcstats",
+	"cmd_invite": "invite",
+	"cmd_help": "help",
+	"cmd_owner": "owner",
+	"cmd_report": "report",
+	"cmd_setgame": "setgame",
+	"cmd_settopic": "settopic",
+	"cmd_serverinfo": "serverinfo",
+	"cmd_hentai": "hentai"
+}
