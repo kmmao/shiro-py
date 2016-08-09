@@ -73,8 +73,8 @@ async def on_ready():
     print('-------------------------\n')
     print('-----------------------------------------')
     print('Authors: AXAz0r, Awakening, Battlemuffins')
-    print('Bot Version: Beta 0.11')
-    print('Build Date: 8. August 2016.')
+    print('Bot Version: Beta 0.12b')
+    print('Build Date: 9. August 2016.')
     print('-----------------------------------------\n')
 
 @client.event
