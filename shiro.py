@@ -89,10 +89,10 @@ async def on_message(message):
             if log.author == message.author:
                 counter += 1
         await client.edit_message(tmp,'<@' + message.author.id + '> You have written {} messages.'.format(counter))
-        print('CMD [' + pfx + cmd_name + '] > ' + initiator_data)
+        print('CMD [' + cmd_name + '] > ' + initiator_data)
     elif message.content.startswith(pfx + cmd_sleep):
         cmd_name = 'Sleep'
-        print('CMD [' + pfx + cmd_name + '] > ' + initiator_data)
+        print('CMD [' + cmd_name + '] > ' + initiator_data)
         await client.send_message(message.channel, 'Good night...')
         await client.change_status(idle=True)
         await asyncio.sleep(5)
@@ -101,59 +101,59 @@ async def on_message(message):
     elif message.content.startswith(pfx + cmd_test):
         cmd_name = 'Test'
         await client.send_message(message.channel, 'Function trigger recognized!')
-        print('CMD [' + pfx + cmd_name + '] > ' + initiator_data)
+        print('CMD [' + cmd_name + '] > ' + initiator_data)
     elif message.content.startswith(pfx + cmd_die):
         cmd_name = 'Die'
         await client.send_message(message.channel, 'Shiro shutting off... Good bye!')
-        print('CMD [' + pfx + cmd_name + '] > ' + initiator_data)
+        print('CMD [' + cmd_name + '] > ' + initiator_data)
         sys.exit('Closed by command.')
     elif message.content.startswith(pfx + cmd_echo + ' '):
         cmd_name = 'Echo'
         await client.send_message(message.channel, message.content[5 + len(pfx):])
-        print('CMD [' + pfx + cmd_name + '] > ' + initiator_data)
+        print('CMD [' + cmd_name + '] > ' + initiator_data)
     elif message.content.startswith(cmd_hentai):
         await client.send_message(message.channel,
                                   'For Hentai and other **NSFW** commands go to the #nsfw channel and spam the shit out of them, for more info, '
                                   'type `-commands NSFW` and @Shizuru will tell you what she can provide!')
         await client.send_message(message.channel, current_time)
         cmd_name = 'Time'
-        print('CMD [' + pfx + cmd_name + '] > ' + initiator_data)
+        print('CMD [' + cmd_name + '] > ' + initiator_data)
     elif message.content.startswith(pfx + cmd_pcstats):
         cmd_name = 'PC Stats'
         await client.send_message(message.channel,
                                   '**MEM Stats:** \n' + str(psutil.virtual_memory()) + '\n\n **CPU Stats:** \n' + str(
                                       psutil.cpu_stats()) + '\n\n **CPU Percent:** \n' + str(
                                       psutil.cpu_percent(percpu=True)))
-        print('CMD [' + pfx + cmd_name + '] > ' + initiator_data)
+        print('CMD [' + cmd_name + '] > ' + initiator_data)
     elif message.content.startswith('<@' + client.user.id + '>'):
         cmd_name = 'BOT Mentioned'
         await client.send_message(message.channel, 'Nani desu ka?')
-        print('CMD [' + pfx + cmd_name + '] > ' + initiator_data)
+        print('CMD [' + cmd_name + '] > ' + initiator_data)
     elif message.content.startswith(pfx + cmd_invite):
         cmd_name = 'Invite'
         await client.send_message(message.channel, 'In progress')
-        print('CMD [' + pfx + cmd_name + '] > ' + initiator_data)
+        print('CMD [' + cmd_name + '] > ' + initiator_data)
     elif message.content.startswith(pfx + cmd_help):
         cmd_name = 'Help'
         await client.send_message(message.channel, 'Command is a work in progress for dynamic lists, please be patient!\n\nOn the bright side, I\'ll be your doctor!')
-        print('CMD [' + pfx + cmd_name + '] > ' + initiator_data)
+        print('CMD [' + cmd_name + '] > ' + initiator_data)
     elif message.content.startswith(pfx + cmd_owner):
         cmd_name = 'Owner Check'
         if message.author.id == ownr:
             await client.send_message(message.channel, '<@' + str(message.author.id) + '> Is the owner')
         else:
             await client.send_message(message.channel, '<@' + str(message.author.id) + '> Is not the owner')
-            print('CMD [' + pfx + cmd_name + '] > ' + initiator_data)
+            print('CMD [' + cmd_name + '] > ' + initiator_data)
     elif message.content.startswith(pfx + cmd_report + ' '):
         cmd_name = 'Report'
         await client.send_message(message.author, message.content[len(cmd_report) + len(pfx):])
-        print('CMD [' + pfx + cmd_name + '] > ' + initiator_data)
+        print('CMD [' + cmd_name + '] > ' + initiator_data)
     elif message.content.startswith(pfx + cmd_setgame + ' '):
         cmd_name = 'Set Game'
         GameName = str(message.content[len(cmd_setgame) + len(pfx):])
         game = discord.Game(name=GameName)
         await client.change_status(game)
         print(GameName)
-        print('CMD [' + pfx + cmd_name + '] > ' + initiator_data)
+        print('CMD [' + cmd_name + '] > ' + initiator_data)
 
 client.run(token)
