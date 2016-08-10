@@ -79,7 +79,9 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    initiator_data = ('by ' + str(message.author) + ' ,UserID: ' + message.author.id + '. Server: ' + message.server.id)
+    # Static Strings
+    initiator_data = ('by: ' + str(message.author) + '\nUserID: ' + message.author.id + '\nServer: ' + message.server.id)
+    permission_error = ('PERMISSION DENIED!\nCommand user by: ' + str(message.author) + '\nUserID: ' + message.author.id + '\nServer: ' + message.server.id)
     client.change_status(game=None)
     if message.content.startswith(pfx + cmd_count):
         cmd_name = 'Count'
@@ -92,25 +94,38 @@ async def on_message(message):
         print('CMD [' + cmd_name + '] > ' + initiator_data)
     elif message.content.startswith(pfx + cmd_sleep):
         cmd_name = 'Sleep'
-        print('CMD [' + cmd_name + '] > ' + initiator_data)
-        await client.send_message(message.channel, 'Good night...')
-        await client.change_status(idle=True)
-        await asyncio.sleep(5)
-        await client.change_status(idle=False)
-        await client.send_message(message.channel, 'Good morning!')
+        if message.author.id == ownr:
+            print('CMD [' + cmd_name + '] > ' + initiator_data)
+            await client.send_message(message.channel, 'Good night...')
+            await client.change_status(idle=True)
+            await asyncio.sleep(5)
+            await client.change_status(idle=False)
+            await client.send_message(message.channel, 'Good morning!')
+        else:
+            await client.send_message(message.channel, '<@' + message.author.id + '>, you do not have permission to do that...')
+            print('CMD [' + cmd_name + '] > ' + permission_error)
+
     elif message.content.startswith(pfx + cmd_test):
         cmd_name = 'Test'
         await client.send_message(message.channel, 'Function trigger recognized!')
         print('CMD [' + cmd_name + '] > ' + initiator_data)
     elif message.content.startswith(pfx + cmd_die):
         cmd_name = 'Die'
-        await client.send_message(message.channel, 'Shiro shutting off... Good bye!')
-        print('CMD [' + cmd_name + '] > ' + initiator_data)
-        sys.exit('Closed by command.')
+        if message.author.id == ownr:
+            await client.send_message(message.channel, 'Shiro shutting off... Good bye!')
+            print('CMD [' + cmd_name + '] > ' + initiator_data)
+            sys.exit('Closed by command.')
+        else:
+            await client.send_message(message.channel, '<@' + message.author.id + '>, you do not have permission to do that...')
+            print('CMD [' + cmd_name + '] > ' + permission_error)
     elif message.content.startswith(pfx + cmd_echo + ' '):
         cmd_name = 'Echo'
-        await client.send_message(message.channel, message.content[5 + len(pfx):])
-        print('CMD [' + cmd_name + '] > ' + initiator_data)
+        if message.author.id == ownr:
+            await client.send_message(message.channel, message.content[5 + len(pfx):])
+            print('CMD [' + cmd_name + '] > ' + initiator_data)
+        else:
+            await client.send_message(message.channel, '<@' + message.author.id + '>, you do not have permission to do that...')
+            print('CMD [' + cmd_name + '] > ' + permission_error)
     elif message.content.startswith(cmd_hentai):
         await client.send_message(message.channel,
                                   'For Hentai and other **NSFW** commands go to the #nsfw channel and spam the shit out of them, for more info, '
@@ -150,10 +165,12 @@ async def on_message(message):
         print('CMD [' + cmd_name + '] > ' + initiator_data)
     elif message.content.startswith(pfx + cmd_setgame + ' '):
         cmd_name = 'Set Game'
-        GameName = str(message.content[len(cmd_setgame) + len(pfx):])
-        game = discord.Game(name=GameName)
-        await client.change_status(game)
-        print(GameName)
-        print('CMD [' + cmd_name + '] > ' + initiator_data)
+        if message.author.id == ownr:
+            GameName = str(message.content[len(cmd_setgame) + len(pfx):])
+            game = discord.Game(name=GameName)
+            print('CMD [' + cmd_name + '] > ' + initiator_data)
+        else:
+            await client.send_message(message.channel, '<@' + message.author.id + '>, you do not have permission to do that...')
+            print('CMD [' + cmd_name + '] > ' + permission_error)
 
 client.run(token)
