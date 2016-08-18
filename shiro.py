@@ -217,4 +217,3 @@ async def on_message(message):
             #print('Queued: ' + str(message.server.name))
 
 client.run(token)
-#client.run('aleksa.radovic95@gmail.com', 'imtoosexy95')
