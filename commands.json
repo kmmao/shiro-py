@@ -1,6 +1,7 @@
 {
 	"cmd_count": "count",
 	"cmd_sleep": "sleep",
+	"cmd_welcome": "welcomemsg",
 	"cmd_test": "test",
 	"cmd_die": "die",
 	"cmd_echo": "echo",
